@@ -1,0 +1,22 @@
+<div>
+  <table class="table-fill">
+    <thead>
+    <tr>
+      <th class="text-left">Team</th>
+      <th class="text-left">Games Played</th>
+      <th class="text-left">Wins</th>
+      <th class="text-left">Losses</th>
+      <th class="text-left">Points</th>
+    </tr>
+    </thead>
+    <tbody class="">
+    <tr *ngFor="let standing of standings | orderBy: pts">
+      <td class="text-left">{{standing.team}}</td>
+      <td class="text-left">{{standing.gamesPlayed}}</td>
+      <td class="text-left">{{standing.wins}}</td>
+      <td class="text-left">{{standing.losses}}</td>
+      <td class="text-left">{{standing.points}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

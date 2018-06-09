@@ -1,0 +1,136 @@
+<div>
+  <table class="table-fill">
+    <thead>
+    <tr>
+      <th class="text-left">Contact Type</th>
+      <th class="text-left">Value</th>
+      <th class="text-left"></th>
+      <th class="text-left"></th>
+    </tr>
+    </thead>
+    <tbody class="">
+    <tr *ngFor="let c of contacts">
+      <td class="text-left">{{c.contactType}}</td>
+      <td class="text-left">{{c.value}}</td>
+      <td (click)="editContact(c.contactId)" class="text-left">edit</td>
+      <td (click)="deleteContact(c.contactId)" class="text-left">delete</td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <div *ngIf="contact">
+    <form class="form-style-4" (ngSubmit)="putModifiedContact()">
+      <div>
+        <label class="col-md-4 control-label" for="Contact">Contact</label>
+        <div class="col-md-4">
+          <input id="ContactEdit"
+                 name="ContactEdit"
+                 [(ngModel)]="model.editValue"
+                 type="text"
+                 placeholder="{{contact.value}}"
+                 class="form-control input-md"
+                 required="">
+        </div>
+      </div>
+
+      <div>
+        <label class="col-md-4 control-label" for="ContactType">Contact type</label>
+        <div class="col-md-4">
+          <select id="ContactTypeEdit" [(ngModel)]="model.contactTypeEditId" name="ContactTypeEdit" class="form-control">
+            <option
+              *ngFor="let ct of contactTypes"
+              [value]="ct.contactTypeId"
+              name="contactTypeEditId"
+              ngDefaultControl
+              value="{{ct.contactTypeId}}">{{ct.contactTypeName}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <h3 (click)="toggleAddNewContact()">Add new contact</h3>
+  <div *ngIf="isAddNewContactVisible">
+    <form class="form-style-4" (ngSubmit)="postContact()">
+      <fieldset>
+
+        <!-- Select Basic -->
+        <div>
+          <label class="col-md-4 control-label" for="ContactType">Contact type</label>
+          <div class="col-md-4">
+            <select id="ContactType" [(ngModel)]="model.contactTypeId" name="ContactType" class="form-control">
+              <option
+                *ngFor="let ct of contactTypes"
+                [value]="ct.contactTypeId"
+                name="contactTypeId"
+                ngDefaultControl
+                value="{{ct.contactTypeId}}">{{ct.contactTypeName}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div>
+          <label class="col-md-4 control-label" for="Contact">Contact</label>
+          <div class="col-md-4">
+            <input id="Contact"
+                   name="Contact"
+                   [(ngModel)]="model.value"
+                   type="text"
+                   placeholder="Enter value"
+                   class="form-control input-md"
+                   required="">
+          </div>
+          <button>Submit</button>
+        </div>
+        <br>
+
+      </fieldset>
+    </form>
+  </div>
+
+  <h3 *ngIf="isAdmin" (click)="toggleShowAdmin()">Administreeri</h3>
+  <div *ngIf="isShowAdmin">
+    <table class="table-fill">
+      <thead>
+      <tr>
+        <th class="text-left">Type</th>
+        <th class="text-left">New type</th>
+        <th class="text-left"></th>
+      </tr>
+      </thead>
+      <tbody class="">
+      <tr *ngFor="let ct of contactTypes">
+        <td class="text-left">{{ct.contactTypeName}}</td>
+        <td class="text-left"><input title="new contact type" type='text' [(ngModel)]="editedContactType[ct.contactTypeId]"/></td>
+        <td *ngIf="editedContactType[ct.contactTypeId] && editedContactType[ct.contactTypeId] != ct.contactTypeName" (click)="editContactType(ct.contactTypeId)" class="text-left">edit</td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <form class="form-style-4" (ngSubmit)="postContactType()">
+      <div>
+        <label class="col-md-4 control-label" for="Contact">Add contact type</label>
+        <div class="col-md-4">
+          <input id="ContactTypeAdd"
+                 name="Contact"
+                 [(ngModel)]="model.contactTypeValue"
+                 type="text"
+                 placeholder="Enter contact type"
+                 class="form-control input-md"
+                 required="">
+        </div>
+        <button>Submit</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>

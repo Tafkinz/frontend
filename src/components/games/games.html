@@ -1,0 +1,31 @@
+<div *ngIf="gamesToAccept.length">
+  <table class="table-fill">
+    <thead>
+    <tr>
+      <th class="text-left">Home Team</th>
+      <th class="text-left">Points</th>
+      <th class="text-left">Away Team</th>
+      <th class="text-left">Points</th>
+      <th class="text-left">Court</th>
+      <th class="text-left">Referee</th>
+      <th class="text-left"></th>
+      <th class="text-left"></th>
+    </tr>
+    </thead>
+    <tbody class="">
+    <tr *ngFor="let game of gamesToAccept">
+      <td class="text-left">{{game.homeTeamId}}</td>
+      <td class="text-left">{{game.homeTeamPoints}}</td>
+      <td class="text-left">{{game.awayTeamId}}</td>
+      <td class="text-left">{{game.awayTeamPoints}}</td>
+      <td class="text-left">{{game.court}}</td>
+      <td class="text-left">{{game.referee}}</td>
+      <td (click)="acceptGame(game.gameTeamId, true)" class="text-left">Accept</td>
+      <td (click)="acceptGame(game.gameTeamId, false)" class="text-left">Decline</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!gamesToAccept.length">
+  <h2>Congratulations, you don't have any pending games to accept</h2>
+</div>
